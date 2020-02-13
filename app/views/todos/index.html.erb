@@ -1,0 +1,25 @@
+
+<% @todos.each_slice(3) do |todo2|%>
+<div class="card-deck">
+   <% todo2.each do |todo|%>
+  <div class="card m-4 p-4">
+  <% if todo.status == true %>
+    <%=  image_tag todo.task.photo, class: 'card-image-top img-fluid', style: 'height:250px;width:250px' %>
+<% else %>
+  <%=  image_tag todo.task.photo, class: 'card-image-top img-fluid', style: 'height:250px;width:250px', style: "filter: grayscale(100%)" %>
+  <%end%>
+    <div class="card-body">
+      <h5 class="card-title"> <%=todo.task.name %></h5>
+  <%=link_to "ver detalle",todos_show_path(todo), class:"btn btn-success" %>
+    </div>
+    <% if todo.status == true %>
+        <%=link_to "listo", todos_update_path(todo), method: :patch, class:"btn btn-outline-success" %>
+        <% else %>
+        <%=link_to "no listo",todos_update_path(todo), method: :patch, class:"btn btn-outline-danger" %>
+        <% end %>
+
+
+  </div>
+    <%end%>
+</div>
+  <%end%>
